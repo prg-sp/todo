@@ -15,14 +15,14 @@ export default class toDo {
 		console.log('yra');
 	}
 
-	getNodeList(cls) {
-		return document.querySelectorAll(cls);
+	liValue(value) {
+		return `<li><input readonly="true" value="${value}"><div><button class='edit'>edit</button><button class='rm'>x</button></div></li>`;
 	}
 
 	liAppend() {
 		if (!this.ul.firstChild) this.ul.innerHTML = '';
 
-		let li = `<li>${this.getInput()}`;
+		let li = this.liValue(this.input.value);
 		this.ul.innerHTML += li;
 
 		this.input.value = '';

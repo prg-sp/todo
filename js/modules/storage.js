@@ -3,6 +3,7 @@ import todo from './todo.js';
 export default class storage extends todo {
 	constructor() {
 		super();
+
 		this.itemsArray = localStorage.getItem('items')
 			? JSON.parse(localStorage.getItem('items'))
 			: [];
@@ -10,42 +11,45 @@ export default class storage extends todo {
 		localStorage.setItem('items', JSON.stringify(this.itemsArray));
 		this.data = JSON.parse(localStorage.getItem('items'));
 
-		console.log(typeof this.data);
-
-		this.shoAllData();
+		this.showAllData();
 	}
 
 	addToStorage() {
-		if (this.input.value !== '') this.itemsArray.push(this.input.value);
+		this.itemsArray.push(this.input.value);
 		localStorage.setItem('items', JSON.stringify(this.itemsArray));
 		this.data = JSON.parse(localStorage.getItem('items'));
 
-		console.log(`prideijas: ${this.itemsArray}`);
-		console.log(`pridiejimas storage: ${localStorage.items}`);
+		console.log(`i areju: ${this.itemsArray}`);
+		console.log(`i storage: ${localStorage.items}`);
+		location.reload(true);
 	}
 
 	removeAllStorage() {
 		localStorage.clear();
+		location.reload(true);
+		console.log(localStorage);
 	}
 
-	shoAllData() {
+	showAllData() {
 		this.data.forEach((item) => {
 			if (!this.ul.firstChild) this.ul.innerHTML = '';
-			let li = `<li class="">${item}<button>edit</button><button class='rm'>delete</button></li>`;
+			let li = this.liValue(item);
 			this.ul.innerHTML += li;
-
-			this.input.value = '';
 		});
 	}
 
-	vienaIsAmintIstrina() {
-		console.log(this.itemsArray[index]);
-		this.itemsArray.splice(index, 1);
-		console.log('atemiau viena: ' + this.itemsArray);
+	vienaIsAmintIstrina(index) {
+		console.log('atemiau: ' + this.itemsArray.splice(index, 1));
+		console.log('array liko: ' + this.itemsArray);
+		this.itemsArray.slice(index, 1);
 
 		localStorage.setItem('items', JSON.stringify(this.itemsArray));
-		this.data = JSON.parse(localStorage.getItem('items'));
-		console.log('o ka sako atmintis?: ' + localStorage.items);
-		// this.dataShow();
+		console.log('storage?: ' + localStorage.items);
+	}
+
+	editintiStorageViena(index) {
+		console.log('atmintis: ' + index);
+		// this.itemsArray.slice(index,1);
+		// localStorage.setItem('items', JSON.stringify(this.itemsArray));
 	}
 }

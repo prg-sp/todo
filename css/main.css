@@ -1,0 +1,42 @@
+ul {
+	display: flex;
+	flex-direction: column;
+	/* justify-content: center; */
+	/* border: 1px solid green; */
+	padding: 0 0 0 0.8em;
+}
+
+li {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	/* border: 1px solid orange; */
+	margin: 0 0 0.3em 0;
+	position: relative;
+}
+
+li::before {
+	content: '';
+	position: absolute;
+	width: 5px;
+	height: 5px;
+	border-radius: 38%;
+	background: black;
+	opacity: 0.8;
+	top: 50%;
+	transform: translateY(-50%);
+	left: -0.7em;
+}
+
+li input {
+	flex-basis: 83%;
+	border: none;
+}
+
+button {
+	margin: 0;
+}
+
+.edit {
+	margin-right: 2px;
+}
