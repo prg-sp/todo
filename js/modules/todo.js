@@ -16,7 +16,7 @@ export default class toDo {
 	}
 
 	liValue(value) {
-		return `<li><input readonly="true" value="${value}"><div><button class='edit'>edit</button><button class='rm'>x</button></div></li>`;
+		return `<li><input readonly="true" value="${value}"><div class="btn-wrapper"><button class='edit'>edit</button><button class='rm'>delete</button></div></li>`;
 	}
 
 	liAppend() {

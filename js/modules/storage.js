@@ -1,6 +1,6 @@
-import todo from './todo.js';
+import ToDo from './todo.js';
 
-export default class storage extends todo {
+export default class Storage extends ToDo {
 	constructor() {
 		super();
 
@@ -47,9 +47,9 @@ export default class storage extends todo {
 		console.log('storage?: ' + localStorage.items);
 	}
 
-	editintiStorageViena(index) {
-		console.log('atmintis: ' + index);
-		// this.itemsArray.slice(index,1);
-		// localStorage.setItem('items', JSON.stringify(this.itemsArray));
+	//edits one storage task item
+	editintiStorageViena(index, item) {
+		this.itemsArray[index] = item;
+		localStorage.setItem('items', JSON.stringify(this.itemsArray));
 	}
 }

@@ -1,9 +1,9 @@
-import todo from './modules/todo.js';
-import atmintis from './modules/storage.js';
+import ToDo from './modules/todo.js';
+import Memory from './modules/storage.js';
 
 const APP = (function () {
-	let task = new todo();
-	let locStor = new atmintis();
+	let task = new ToDo();
+	let locStor = new Memory();
 
 	//prideda task
 	task.submitInputEvent((e) => {
@@ -34,26 +34,30 @@ const APP = (function () {
 
 	//editinimas
 	let editas = document.querySelectorAll('.edit');
-	editas.forEach((y, index) => {
-		y.addEventListener('click', () => {
-			locStor.editintiStorageViena(index);
-			console.log('frontas: ' + index);
-			console.log(y.parentNode.parentNode.firstChild);
-			y.parentNode.parentNode.firstChild.removeAttribute('readonly');
-			console.log(y.parentNode.parentNode.firstChild);
-			y.parentNode.parentNode.firstChild.classList.add('has-error');
-			y.parentNode.parentNode.firstChild.focus();
+	editas.forEach((input) => {
+		input.addEventListener('click', () => {
+			input.parentNode.parentNode.firstChild.removeAttribute('readonly');
+			input.parentNode.parentNode.firstChild.classList.add('has-error');
+			input.parentNode.parentNode.firstChild.focus();
 		});
 	});
 
-	editas.forEach((y, index) => {
-		y.parentNode.parentNode.firstChild.addEventListener('keyup', (event) => {
-			if (event.key == 'Enter') {
-				y.parentNode.parentNode.firstChild.classList.remove('has-error');
-				y.parentNode.parentNode.firstChild.setAttribute('readonly', 'true');
-				task.input.focus();
-			}
-		});
+	editas.forEach((input, index) => {
+		input.parentNode.parentNode.firstChild.addEventListener(
+			'keyup',
+			(event) => {
+				if (event.code == 'Enter') {
+					input.parentNode.parentNode.firstChild.classList.remove('has-error');
+					input.parentNode.parentNode.firstChild.setAttribute(
+						'readonly',
+						'true',
+					);
+					let newVal = input.parentNode.parentNode.firstChild.value;
+					locStor.editintiStorageViena(index, newVal);
+					task.input.focus();
+				}
+			},
+		);
 	});
 
 	return { locStor };
