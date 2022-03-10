@@ -1,4 +1,4 @@
-export default class toDo {
+export default class ToDo {
 	constructor() {
 		this.form = document.querySelector('form');
 		this.ul = document.querySelector('ul');
@@ -6,17 +6,8 @@ export default class toDo {
 		this.button = document.querySelector('.button');
 	}
 
-	getInput() {
-		return this.input.value;
-	}
-
-	irasuTikrinimas() {
-		if (this.visi.length == 0) return console.log('nera nieko');
-		console.log('yra');
-	}
-
 	liValue(value) {
-		return `<li><input readonly="true" value="${value}"><div class="btn-wrapper"><button class='edit'>edit</button><button class='rm'>delete</button></div></li>`;
+		return `<li><input readonly="true" value="${value}"><div class="btn-wrapper"><button class='edit'>edit</button><button class='delete'>delete</button></div></li>`;
 	}
 
 	liAppend() {

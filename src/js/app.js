@@ -1,9 +1,9 @@
 import ToDo from './modules/todo.js';
-import Memory from './modules/storage.js';
+import Memo from './modules/storage.js';
 
 const APP = (function () {
 	let task = new ToDo();
-	let locStor = new Memory();
+	let locStor = new Memo();
 
 	//prideda task
 	task.submitInputEvent((e) => {
@@ -21,7 +21,7 @@ const APP = (function () {
 	});
 
 	//istrina po viena
-	let visi = document.querySelectorAll('.rm');
+	let visi = document.querySelectorAll('.delete');
 	visi.forEach((x, index) => {
 		x.addEventListener('click', () => {
 			//is front endo
@@ -36,6 +36,7 @@ const APP = (function () {
 	let editas = document.querySelectorAll('.edit');
 	editas.forEach((input) => {
 		input.addEventListener('click', () => {
+			console.log(input.parentNode.parentNode.firstChild);
 			input.parentNode.parentNode.firstChild.removeAttribute('readonly');
 			input.parentNode.parentNode.firstChild.classList.add('has-error');
 			input.parentNode.parentNode.firstChild.focus();

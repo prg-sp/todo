@@ -1,0 +1,5 @@
+node_modules
+info.txt
+.nyc_output
+coverage
+test
