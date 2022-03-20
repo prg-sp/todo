@@ -1,6 +1,7 @@
 export default class UI {
 	constructor() {
-		this.container = document.querySelector('.small-container');
+		// this.container = document.querySelector('.small-container');
+		this.container = document.querySelector('.alert-container');
 		this.form = document.querySelector('form');
 		this.input = document.getElementById('task');
 		this.ulList = document.querySelector('ul');
@@ -26,8 +27,9 @@ export default class UI {
 		div.appendChild(text);
 
 		const container = this.container;
-		const form = this.form;
-		container.insertBefore(div, form);
+		// const form = this.form;
+		// container.insertBefore(div, form);
+		container.appendChild(div);
 
 		setTimeout(() => {
 			this.hideAlert();

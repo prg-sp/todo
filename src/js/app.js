@@ -3,6 +3,9 @@ import Storage from './modules/storage.js';
 import UI from './modules/ui.js';
 
 function init() {
+	// let x = new UI();
+	// x.showAlert('kra', 'success');
+
 	Storage.displayTasks();
 	addListeners();
 }
