@@ -1,9 +1,5 @@
-import ToDo from './todo.js';
-
-export default class Storage extends ToDo {
+class Storage {
 	constructor() {
-		super();
-
 		this.itemsArray = localStorage.getItem('items')
 			? JSON.parse(localStorage.getItem('items'))
 			: [];
@@ -44,3 +40,5 @@ export default class Storage extends ToDo {
 		localStorage.setItem('items', JSON.stringify(this.itemsArray));
 	}
 }
+
+export const storage = new Storage();
