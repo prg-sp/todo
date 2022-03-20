@@ -2,24 +2,24 @@ import Task from './modules/task.js';
 import Storage from './modules/storage.js';
 import UI from './modules/ui.js';
 
-function init() {
-	// let x = new UI();
-	// x.showAlert('kra', 'success');
+let ui = new UI();
 
+function init() {
 	Storage.displayTasks();
 	addListeners();
 }
 
 function addListeners() {
-	const form = document.querySelector('form');
-	form.addEventListener('submit', addTask);
-
-	const list = document.querySelector('ul');
-	list.addEventListener('click', removeTask);
-
-	const button = document.querySelector('.button');
-	button.addEventListener('click', removeAllTasks);
+	ui.form.addEventListener('submit', addTask);
+	ui.ulList.addEventListener('click', removeTask);
+	ui.button.addEventListener('click', removeAllTasks);
+	ui.filter.addEventListener('keyup', filterTasks);
 }
+
+const filterTasks = (e) => {
+	let ui = new UI();
+	ui.filterTasks(e.target);
+};
 
 const addTask = (e) => {
 	//initiate UI

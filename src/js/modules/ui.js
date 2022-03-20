@@ -5,6 +5,9 @@ export default class UI {
 		this.form = document.querySelector('form');
 		this.input = document.getElementById('task');
 		this.ulList = document.querySelector('ul');
+		this.fltTasks = document.querySelectorAll('.rm-task');
+		this.button = document.querySelector('.button');
+		this.filter = document.getElementById('filter');
 	}
 
 	addTaskToList(task) {
@@ -42,10 +45,24 @@ export default class UI {
 
 	deleteTask(target, className) {
 		if (target.classList.contains(className));
-		target.parentNode.remove();
+		target.parentElement.remove();
 	}
 
 	deleteAllTasks(element) {
 		element.firstChild.remove();
+	}
+
+	filterTasks(target) {
+		const text = target.value.toLowerCase();
+
+		this.fltTasks.forEach((task) => {
+			const item = task.parentElement.firstChild.textContent;
+
+			if (item.toLowerCase().indexOf(text) != -1) {
+				task.parentElement.style.display = 'flex';
+			} else {
+				task.parentElement.style.display = 'none';
+			}
+		});
 	}
 }

@@ -107,7 +107,15 @@ button {
 .alert {
 	position: absolute;
 	top: -4.5em;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 20em;
+	right: 0;
+	/* transform: translateX(-50%); */
+	width: 50%;
+}
+
+.block {
+	display: block;
+}
+
+.rm {
+	display: none;
 }
