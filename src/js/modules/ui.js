@@ -11,7 +11,6 @@ export default class UI {
 		const li = document.createElement('li');
 		li.innerHTML = `${task.input} <button class='rm-task'>x</button>`;
 		li.setAttribute('data-id', task.id);
-		// console.log(`xx: ${task.input}`);
 		list.appendChild(li);
 	}
 
