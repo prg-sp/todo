@@ -1,22 +1,11 @@
 import Task from './modules/task.js';
-import { storage } from './modules/storage.js';
+import Storage from './modules/storage.js';
 import UI from './modules/ui.js';
 
 function init() {
-	// let i = new UI();
-	// i.showAlert('nzn', 'success');
+	Storage.displayTasks();
 	addListeners();
 }
-
-// Task constructor
-// -- task
-
-// ui constructor
-// -- delete task
-// -- add task
-// -- show task
-// -- delte all
-// -- show messages success eror
 
 function addListeners() {
 	const form = document.querySelector('form');
@@ -32,13 +21,14 @@ function addListeners() {
 const addTask = (e) => {
 	//initiate UI
 	let ui = new UI();
-	console.log(ui);
-
-	//get form value
 	let input = ui.input.value;
 
 	//new task
 	let task = new Task(input);
+	console.log(task);
+
+	//localstorage
+	Storage.addTask(task);
 
 	//validation
 	const re = /^\s*$/gi;
@@ -58,11 +48,13 @@ const addTask = (e) => {
 const removeTask = (e) => {
 	const liElementVal = e.target.parentNode.firstChild.textContent;
 	const question = `Are  you sure about: ${liElementVal}`;
+	const taskId = e.target.parentElement.getAttribute('data-id');
 	const ui = new UI();
 
 	if (confirm(question) === true) {
 		ui.deleteTask(e.target, '.rm-task');
-		ui.showAlert('This task was deleted', 'success');
+		ui.showAlert(`Task: ${liElementVal} was removed!`, 'success');
+		Storage.removeTask(taskId);
 	}
 };
 
@@ -74,57 +66,15 @@ const removeAllTasks = () => {
 		if (confirm('Remove all?')) {
 			while (list.firstChild) {
 				ui.deleteAllTasks(list);
+				Storage.removeAllTasks();
 			}
+
 			ui.showAlert('All tasks are gone', 'success');
 		}
 	}
 };
 
-// storage.addToStorage();
-
-//pasalina visus task
-// task.rmAllEvent(() => {
-// 	storage.removeAllStorage();
-// 	task.liRemoveAll();
-// 	console.log('removed all li');
-// });
-
-//istrina po viena
-//let visi = document.querySelectorAll('.delete');
-//visi.forEach((x, index) => {
-//	x.addEventListener('click', () => {
-//		//is front endo
-//		x.parentNode.parentNode.remove();
-
-//		//is atminties
-//		storage.vienaIsAmintIstrina(index);
-//	});
-//});
-
-//editinimas
-// let editas = document.querySelectorAll('.edit');
-// editas.forEach((input) => {
-// 	input.addEventListener('click', () => {
-// 		console.log(input.parentNode.parentNode.firstChild);
-// 		input.parentNode.parentNode.firstChild.removeAttribute('readonly');
-// 		input.parentNode.parentNode.firstChild.classList.add('has-error');
-// 		input.parentNode.parentNode.firstChild.focus();
-// 	});
-// });
-
-// editas.forEach((input, index) => {
-// 	input.parentNode.parentNode.firstChild.addEventListener('keyup', (event) => {
-// 		if (event.code == 'Enter') {
-// 			input.parentNode.parentNode.firstChild.classList.remove('has-error');
-// 			input.parentNode.parentNode.firstChild.setAttribute('readonly', 'true');
-// 			let newVal = input.parentNode.parentNode.firstChild.value;
-// 			storage.editintiStorageViena(index, newVal);
-// 			task.input.focus();
-// 		}
-// 	});
-// });
-
 document.addEventListener('DOMContentLoaded', init);
 
-// console.log(storage.data);
-// console.log(localStorage);
+console.log(Storage.getTasks());
+console.log(localStorage);

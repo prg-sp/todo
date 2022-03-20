@@ -1,44 +1,45 @@
-class Storage {
-	constructor() {
-		this.itemsArray = localStorage.getItem('items')
-			? JSON.parse(localStorage.getItem('items'))
-			: [];
+import UI from './ui.js';
 
-		localStorage.setItem('items', JSON.stringify(this.itemsArray));
-		this.data = JSON.parse(localStorage.getItem('items'));
+export default class Storage {
+	static getTasks() {
+		let tasks;
 
-		this.showAllData();
+		if (localStorage.getItem('tasks') === null) {
+			tasks = [];
+		} else {
+			tasks = JSON.parse(localStorage.getItem('tasks'));
+		}
+
+		return tasks;
 	}
 
-	addToStorage() {
-		this.itemsArray.push(this.input.value);
-		localStorage.setItem('items', JSON.stringify(this.itemsArray));
-		this.data = JSON.parse(localStorage.getItem('items'));
-		location.reload(true);
+	static addTask(task) {
+		const tasks = Storage.getTasks();
+		tasks.push(task);
+		localStorage.setItem('tasks', JSON.stringify(tasks));
 	}
 
-	removeAllStorage() {
-		localStorage.clear();
-		location.reload(true);
-	}
-
-	showAllData() {
-		this.data.forEach((item) => {
-			if (!this.ul.firstChild) this.ul.innerHTML = '';
-			let li = this.liValue(item);
-			this.ul.innerHTML += li;
+	static displayTasks() {
+		const tasks = Storage.getTasks();
+		tasks.forEach((task) => {
+			let ui = new UI();
+			ui.addTaskToList(task);
 		});
 	}
 
-	vienaIsAmintIstrina(index) {
-		this.itemsArray.slice(index, 1);
-		localStorage.setItem('items', JSON.stringify(this.itemsArray));
+	static removeTask(id) {
+		const tasks = Storage.getTasks();
+		tasks.forEach((task, index) => {
+			if (id == task.id) {
+				console.log(`${id} : ${task.input}`);
+				tasks.splice(index, 1);
+			}
+
+			localStorage.setItem('tasks', JSON.stringify(tasks));
+		});
 	}
 
-	editintiStorageViena(index, item) {
-		this.itemsArray[index] = item;
-		localStorage.setItem('items', JSON.stringify(this.itemsArray));
+	static removeAllTasks() {
+		localStorage.clear();
 	}
 }
-
-export const storage = new Storage();

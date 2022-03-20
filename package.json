@@ -9,7 +9,7 @@
 	},
 	"scripts": {
 		"start": "webpack serve",
-		"builld": "webpack",
+		"build": "webpack",
 		"test": "nyc --reporter=text ./node_modules/mocha/bin/mocha test/**/*.js --require babel-register",
 		"coverage": "nyc --reporter=html ./node_modules/mocha/bin/mocha test/**/*.js --require babel-register"
 	},
