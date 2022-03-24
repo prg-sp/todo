@@ -26,38 +26,41 @@ const addTask = (e) => {
 	let ui = new UI();
 	let input = ui.input.value;
 
-	//new task
-	let task = new Task(input);
-	console.log(task);
-
-	//localstorage
-	Storage.addTask(task);
-
 	//validation
 	const re = /^\s*$/gi;
-	const rezas = re.test(input);
-
-	if (rezas) {
+	const badInput = re.test(input);
+	console.log(badInput);
+	if (badInput) {
+		console.log('nera inputo');
 		ui.showAlert('Please enter something', 'error');
 	} else {
+		//new task
+		let task = new Task(input);
+		console.log(task);
+
 		ui.addTaskToList(task);
-		ui.showAlert('All good for:', 'success');
+		ui.showAlert(' was added!', 'success');
 		ui.clearInput();
+
+		//localstorage
+		Storage.addTask(task);
 	}
 
 	e.preventDefault();
 };
 
 const removeTask = (e) => {
-	const liElementVal = e.target.parentNode.firstChild.textContent;
-	const question = `Are  you sure about: ${liElementVal}`;
 	const taskId = e.target.parentElement.getAttribute('data-id');
+	const liElementVal = e.target.parentNode.firstChild.data;
+	const question = `Are  you sure about: ${liElementVal}`;
 	const ui = new UI();
 
-	if (confirm(question) === true) {
-		ui.deleteTask(e.target, '.rm-task');
-		ui.showAlert(`Task: ${liElementVal} was removed!`, 'success');
-		Storage.removeTask(taskId);
+	if (e.target.className === 'rm-task') {
+		if (confirm(question) === true) {
+			ui.deleteTask(e.target);
+			ui.showAlert(`${liElementVal}, was removed!`, 'success');
+			Storage.removeTask(taskId);
+		}
 	}
 };
 
@@ -71,9 +74,10 @@ const removeAllTasks = () => {
 				ui.deleteAllTasks(list);
 				Storage.removeAllTasks();
 			}
-
 			ui.showAlert('All tasks are gone', 'success');
 		}
+	} else {
+		ui.showAlert('Nothing to remove', 'error');
 	}
 };
 

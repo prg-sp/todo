@@ -1,6 +1,5 @@
 export default class UI {
 	constructor() {
-		// this.container = document.querySelector('.small-container');
 		this.container = document.querySelector('.alert-container');
 		this.form = document.querySelector('form');
 		this.input = document.getElementById('task');
@@ -26,12 +25,10 @@ export default class UI {
 		const input = this.input.value;
 		const div = document.createElement('div');
 		div.className = `alert ${className}`;
-		const text = document.createTextNode(`${msg} ${input}`);
+		const text = document.createTextNode(` ${input} ${msg}`);
 		div.appendChild(text);
 
 		const container = this.container;
-		// const form = this.form;
-		// container.insertBefore(div, form);
 		container.appendChild(div);
 
 		setTimeout(() => {
@@ -43,9 +40,9 @@ export default class UI {
 		document.querySelector('.alert').remove();
 	}
 
-	deleteTask(target, className) {
-		if (target.classList.contains(className));
+	deleteTask(target) {
 		target.parentElement.remove();
+		console.log(target.parentNode.firstChild.data);
 	}
 
 	deleteAllTasks(element) {
