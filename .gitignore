@@ -4,3 +4,5 @@ info.txt
 coverage
 test
 public
+.babelrc
+tests
