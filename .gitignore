@@ -1,8 +1,12 @@
-node_modules
-info.txt
+node_modules/
+
+info/
+
+public/
+
+test/
+
 .nyc_output
 coverage
-test
-public
+
 .babelrc
-tests
