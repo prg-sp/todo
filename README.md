@@ -1,5 +1,7 @@
+# Info about app
+- CRD, but not CRUD. Cannot update tasks; 
+- application  keeps all data in memory (in local storage) even after close/reload broser;
+
 # todo
-- html , css, js;
-- almost CRUD, because cannot not update tasks;
-- used browser local storage. So tasks does'nt desapare after refresh
-  or browser close;
+- ~~deploy~~;
+- replace browsers 'confirm' code;
