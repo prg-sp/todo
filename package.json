@@ -8,8 +8,10 @@
 		"test": "test"
 	},
 	"scripts": {
-		"start": "webpack serve",
-		"build": "webpack",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -b gh-pages -d public",
+		"start": "webpack-dev-server --config webpack.dev.cjs ",
+		"build": "webpack --config webpack.prod.cjs",
 		"test": "nyc --reporter=text ./node_modules/mocha/bin/mocha test/**/*.js --require babel-register",
 		"coverage": "nyc --reporter=html ./node_modules/mocha/bin/mocha test/**/*.js --require babel-register"
 	},
@@ -17,16 +19,35 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
+		"autoprefixer": "^10.4.4",
 		"babel-preset-latest": "^6.24.1",
 		"babel-register": "^6.26.0",
 		"chai": "^4.3.6",
+		"clean-webpack-plugin": "^4.0.0",
 		"css-loader": "^6.7.1",
+		"css-minimizer-webpack-plugin": "^3.4.1",
+		"html-webpack-plugin": "^5.5.0",
 		"jsdom": "^19.0.0",
+		"mini-css-extract-plugin": "^2.6.0",
 		"mocha": "^9.2.1",
 		"nyc": "^15.1.0",
+		"postcss-loader": "^6.2.1",
 		"style-loader": "^3.3.1",
 		"webpack": "^5.70.0",
 		"webpack-cli": "^4.9.2",
-		"webpack-dev-server": "^4.7.4"
+		"webpack-dev-server": "^4.7.4",
+		"webpack-merge": "^5.8.0"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
 	}
 }

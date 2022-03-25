@@ -30,9 +30,11 @@ const addTask = (e) => {
 	const re = /^\s*$/gi;
 	const badInput = re.test(input);
 	console.log(badInput);
+
 	if (badInput) {
 		console.log('nera inputo');
-		ui.showAlert('Please enter something', 'error');
+		ui.showAlert('<b>Please enter something</b>', 'error');
+		ui.clearInput();
 	} else {
 		//new task
 		let task = new Task(input);
@@ -58,7 +60,7 @@ const removeTask = (e) => {
 	if (e.target.className === 'rm-task') {
 		if (confirm(question) === true) {
 			ui.deleteTask(e.target);
-			ui.showAlert(`${liElementVal}, was removed!`, 'success');
+			ui.showAlert(`<b>${liElementVal}</b>, was removed!`, 'success');
 			Storage.removeTask(taskId);
 		}
 	}
@@ -74,10 +76,10 @@ const removeAllTasks = () => {
 				ui.deleteAllTasks(list);
 				Storage.removeAllTasks();
 			}
-			ui.showAlert('All tasks are gone', 'success');
+			ui.showAlert('<b>All tasks are gone</b>', 'success');
 		}
 	} else {
-		ui.showAlert('Nothing to remove', 'error');
+		ui.showAlert('<b>Nothing to remove!</b>', 'error');
 	}
 };
 

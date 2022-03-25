@@ -12,7 +12,8 @@ export default class UI {
 	addTaskToList(task) {
 		const list = this.ulList;
 		const li = document.createElement('li');
-		li.innerHTML = `${task.input} <button class='rm-task'>x</button>`;
+		li.className = 'list__item';
+		li.innerHTML = `${task.input} <button class='rm-task'>X</button>`;
 		li.setAttribute('data-id', task.id);
 		list.appendChild(li);
 	}
@@ -24,16 +25,20 @@ export default class UI {
 	showAlert(msg, className) {
 		const input = this.input.value;
 		const div = document.createElement('div');
-		div.className = `alert ${className}`;
-		const text = document.createTextNode(` ${input} ${msg}`);
-		div.appendChild(text);
+		div.classList.add('alert', 'faded-out', `${className}`);
+
+		requestAnimationFrame(() => {
+			div.classList.remove('faded-out');
+		});
+
+		div.innerHTML = `<b>${input}</b> ${msg}`;
 
 		const container = this.container;
 		container.appendChild(div);
 
 		setTimeout(() => {
 			this.hideAlert();
-		}, 3000);
+		}, 2000);
 	}
 
 	hideAlert() {
